@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.portfolio.spring.dao.UserDao">
+	
+	<select id = "userInfo"  resultType = "com.portfolio.spring.dto.UserInfoDto">
+		SELECT * FROM USERINFO WHERE UID = #{param1}
+	</select>
+	
+	<select id = "userNick" resultType = "java.lang.String">
+		SELECT UNICK FROM USERINFO WHERE UID = #{param1}
+	</select>
+	
+	<select id = "checkUserId" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM USERINFO WHERE UID = #{param1}
+	</select>
+	
+	<select id = "checkUserNick" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM USERINFO WHERE UNICK = #{param1}
+	</select>
+	
+	<insert id = "joinUser" parameterType = "com.portfolio.spring.dto.UserInfoDto">
+		INSERT INTO USERINFO(UID, UPW, UNICK, UPHONE, UADDR, UBIRTH, UGENDER) VALUES(#{uid}, #{upw}, #{unick}, #{uphone}, #{uaddr}, #{ubirth}, #{ugender})
+	</insert>
+	
+	<update id = "modifyUser" parameterType = "com.portfolio.spring.dto.UserInfoDto">
+		UPDATE USERINFO SET UPW = #{upw}, UNICK = #{unick}, UPHONE = #{uphone}, UADDR = #{uaddr}, UBIRTH = #{ubirth}, UGENDER = #{ugender} WHERE UID = #{uid} 
+	</update>
+	
+	<insert id = "accountAdmin" parameterType = "com.portfolio.spring.dto.UserInfoDto">
+		INSERT INTO USERINFO(UID, UPW, UNICK, UAUTHORITYIDX) VALUES(#{uid}, #{upw}, #{unick}, #{uauthorityIdx})
+	</insert> 
+	
+	<select id="selectUserUidx" resultType = "java.lang.Integer">
+		SELECT UIDX FROM USERINFO WHERE UID = #{param1} 
+	</select>
+	
+	<select id="selectUserBag" resultType = "java.lang.String">
+		SELECT UBAGID FROM USERINFO WHERE UID = #{param1}
+	</select>
+	
+	<update id="updateInputBag">
+		UPDATE USERINFO SET UBAGID = #{param2} WHERE UIDX = #{param1} 
+	</update>
+	
+	
+	<!-- 석범추가 -->
+	<select id = "userlist"  resultType = "com.portfolio.spring.dto.UserInfoDto">
+		SELECT * FROM USERINFO
+	</select>
+	
+	<select id = "userDetail"  resultType = "com.portfolio.spring.dto.UserInfoDto">
+		SELECT * FROM USERINFO WHERE UIDX = #{param1}
+	</select>
+	
+	<update id="userBan">
+		UPDATE USERINFO SET ENABLED = 0 WHERE UIDX = #{param1}
+	</update>
+	
+</mapper>

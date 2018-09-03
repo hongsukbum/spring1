@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.portfolio.spring.dao.PurchaseStatusDao">
+	
+	<select id="getStatusName" resultType ="java.lang.String">
+		SELECT PS_NAME FROM PURCHASE_STATUS WHERE PS_IDX = #{param1} 
+	</select>
+	
+	<select id="getStatusList" resultType="com.portfolio.spring.dto.PurchaseStatusDto">
+		SELECT * FROM PURCHASE_STATUS
+	</select>
+	
+</mapper>

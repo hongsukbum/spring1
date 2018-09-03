@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.portfolio.spring.dao.VisitorBackDao">
+
+	<insert id="insertDay" parameterType="com.portfolio.spring.dto.VisitorBackDto">
+		INSERT INTO VISITOR_BACK(TOTALVIEW, GUESTVIEW, LOGINVIEW) VALUES(#{totalView},#{guestView},#{loginView})
+	</insert>
+	
+	<select id="countDay" resultType="com.portfolio.spring.dto.VisitorBackDto">
+		SELECT * FROM VISITOR_BACK ORDER BY IDX DESC LIMIT 7
+	</select>
+
+</mapper>

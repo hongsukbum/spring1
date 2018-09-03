@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.portfolio.spring.dao.VisitorDao">
+
+	<insert id="insertVisitor" parameterType="com.portfolio.spring.dto.VisitorDto">
+		INSERT INTO VISITOR(UID, IP) VALUES(#{uid}, #{ip})
+	</insert>
+	
+	<select id="countDayViewGuest" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM VISITOR WHERE UID IS NULL
+	</select>
+	
+	<select id="countDayViewLogin" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM VISITOR WHERE UID IS NOT NULL
+	</select>
+	
+	<select id="countDayView" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM VISITOR
+	</select>
+	
+	<delete id="deleteDayView">
+		DELETE FROM VISITOR
+	</delete>
+	
+</mapper>

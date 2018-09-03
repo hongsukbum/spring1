@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.portfolio.spring.dao.ProductDao">
+	
+	<insert id = "insertNewProduct" parameterType = "com.portfolio.spring.dto.ProductDto">
+		INSERT INTO PRODUCT(PD_NAME, PD_TITLE, PD_CONTENT, PD_IMAGE_PATH, PD_IMAGE, PD_CHARGE, PD_COUNT, PD_PDC_IDX, PD_PDCS_IDX) VALUES(#{pd_name},#{pd_title},#{pd_content}, #{pd_image_path} ,#{pd_image},#{pd_charge},#{pd_count}, #{pd_pdc_idx}, #{pd_pdcs_idx})
+	</insert>
+	
+	<update id="modifyProduct" parameterType = "com.portfolio.spring.dto.ProductDto">
+		UPDATE PRODUCT SET PD_NAME = #{pd_name}, PD_TITLE = #{pd_title}, PD_CONTENT=#{pd_content}, PD_IMAGE=#{pd_image}, PD_CHARGE=#{pd_charge}, PD_COUNT=#{pd_count}, PD_PDC_IDX=#{pd_pdc_idx}, PD_PDCS_IDX=#{pd_pdcs_idx} WHERE PD_IDX = #{pd_idx}
+	</update>
+	
+	<select id="productTotalCnt" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE PD_COUNT > 0
+	</select>
+	
+	<select id="productTotalCnt_Admin" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT
+	</select>
+	
+	<select id="productTotalCateCnt" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE PD_PDC_IDX = #{param1} AND PD_COUNT > 0
+	</select>
+	
+	<select id="productTotalCateCnt_Admin" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE PD_PDC_IDX = #{param1}
+	</select>
+	
+	<select id="productSearchTotalCnt" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE (PD_NAME LIKE CONCAT('%',#{param1},'%') OR PD_TITLE LIKE CONCAT('%',#{param1},'%')) AND PD_COUNT > 0 
+	</select>
+	
+	<select id="productSearchTotalCnt_Admin" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE (PD_NAME LIKE CONCAT('%',#{param1},'%') OR PD_TITLE LIKE CONCAT('%',#{param1},'%')) 
+	</select>
+	
+	<select id="productSearchTotalCateCnt" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE (PD_NAME LIKE CONCAT('%',#{param1},'%') OR PD_TITLE LIKE CONCAT('%',#{param1},'%')) AND PD_PDC_IDX = #{param2} AND PD_COUNT > 0
+	</select>
+	
+	<select id="productSearchTotalCateCnt_Admin" resultType = "java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE (PD_NAME LIKE CONCAT('%',#{param1},'%') OR PD_TITLE LIKE CONCAT('%',#{param1},'%')) AND PD_PDC_IDX = #{param2}
+	</select>
+	
+	<select id = "productAllList" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE PD_COUNT > 0 ORDER BY PD_IDX DESC LIMIT #{param1}, #{param2}
+	</select>
+	
+	<select id = "productAllList_Admin" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT ORDER BY PD_IDX DESC LIMIT #{param1}, #{param2}
+	</select>
+	
+	<select id = "productCateList" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE PD_PDC_IDX = #{param3} AND PD_COUNT > 0 ORDER BY PD_IDX DESC LIMIT #{param1}, #{param2}
+	</select>
+	
+	<select id = "productCateList_Admin" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE PD_PDC_IDX = #{param3} ORDER BY PD_IDX DESC LIMIT #{param1}, #{param2}
+	</select>
+	
+	<select id = "productSearchAllList" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE (PD_NAME LIKE CONCAT('%',#{param3},'%') OR PD_TITLE LIKE CONCAT('%',#{param3},'%')) AND PD_COUNT > 0 ORDER BY PD_IDX DESC LIMIT #{param1}, #{param2}
+	</select>
+	
+	<select id = "productSearchAllList_Admin" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE (PD_NAME LIKE CONCAT('%',#{param3},'%') OR PD_TITLE LIKE CONCAT('%',#{param3},'%')) ORDER BY PD_IDX DESC LIMIT #{param1}, #{param2}
+	</select>
+	
+	<select id = "productSearchCateList" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE (PD_NAME LIKE CONCAT('%',#{param3},'%') OR PD_TITLE LIKE CONCAT('%',#{param3},'%')) AND PD_PDC_IDX = ${param4} AND PD_COUNT > 0 ORDER BY PD_IDX DESC LIMIT #{param1}, #{param2}
+	</select>
+	
+	<select id = "productSearchCateList_Admin" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE (PD_NAME LIKE CONCAT('%',#{param3},'%') OR PD_TITLE LIKE CONCAT('%',#{param3},'%')) AND PD_PDC_IDX = ${param4} ORDER BY PD_IDX DESC LIMIT #{param1}, #{param2}
+	</select>
+	
+	<select id="productDetail" resultType = "com.portfolio.spring.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE PD_IDX = #{param1} <!-- AND PD_COUNT > 0 -->
+	</select>
+	
+	<delete id="productDelete">
+		DELETE FROM PRODUCT WHERE PD_IDX = #{param1}
+	</delete>
+	
+	<update id="productPurchase" parameterType="java.lang.Integer">
+		UPDATE PRODUCT SET PD_COUNT = PD_COUNT - #{param2}, PD_PURCHASE_COUNT = PD_PURCHASE_COUNT+#{param2} WHERE PD_IDX = #{param1}
+	</update>
+	
+	<select id = "productPurchaseResultCount" resultType="java.lang.Integer">
+		SELECT PD_COUNT FROM PRODUCT WHERE PD_IDX = #{param1} 
+	</select>
+	
+	<select id="checkProduct" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE PD_IDX = #{param1}
+	</select>
+	
+</mapper>

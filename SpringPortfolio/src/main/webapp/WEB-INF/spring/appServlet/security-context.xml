@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+	<security:http auto-config="true" use-expressions = "true">
+		<security:form-login login-page = "/login"
+			default-target-url = "/loginok"
+			authentication-failure-url="/login?ng"/>
+		
+		<security:logout logout-success-url = "/logout" invalidate-session = "false"/>
+		<!--  invalidate-session = "true" -->
+		
+		<!-- 아무나 다 사용가능. -->
+		<security:intercept-url pattern="/" access="permitAll"/>
+		
+		<!-- 인증한 사람만 가능 - 로그인한사람 -->
+		<!-- <security:intercept-url pattern="/userinfoPage" access = "isAuthenticated()"/>
+		<security:intercept-url pattern="/userinfoModifyPage" access = "isAuthenticated()"/> -->
+		<security:intercept-url pattern="/qnalist" access = "isAuthenticated()"/>
+		<security:intercept-url pattern="/qnaWrite" access = "isAuthenticated()"/>
+		<security:intercept-url pattern="/qnaWriteConfirm" access = "isAuthenticated()"/>
+		
+		<security:intercept-url pattern="/productPurchaseCheck" access = "isAuthenticated()"/>
+		<security:intercept-url pattern="/productPurchase" access = "isAuthenticated()"/>
+		<security:intercept-url pattern="/productInputBag" access = "isAuthenticated()"/>
+		<security:intercept-url pattern="/productBag" access = "isAuthenticated()"/>
+		<security:intercept-url pattern="/productUserBagDelete" access = "isAuthenticated()"/>
+		<security:intercept-url pattern="/productPurchaseBag" access = "isAuthenticated()"/>
+		
+		
+		<!-- ROLE_USER만 사용가능. -->
+		<security:intercept-url pattern="/userinfoPage" access = "hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/userinfoModifyPage" access = "hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/userinfoModifyPage" access = "hasRole('ROLE_USER')"/>
+		
+		<!-- ROLE_ADMIN만 사용가능. -->
+		<security:intercept-url pattern="/adminUserInfoList" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/adminAddAccount" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/adminAccountConfirm" access="hasRole('ROLE_ADMIN')"/>
+		
+		<security:intercept-url pattern="/product_enrollment" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/product_enrollmentConfirm" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/productDelete" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/productModifyConfirm" access="hasRole('ROLE_ADMIN')"/>
+		
+		
+	</security:http>
+	
+	
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select uid as userName, upw as password, uenabled as enabled from userinfo where uid = ? "
+				authorities-by-username-query="select uid as userName, authority from userinfo join user_authority on userinfo.uauthorityIdx = user_authority.aidx where uid = ?"
+			/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.portfolio.spring.dao.QnaCateDao">
+	
+	<!-- 전체 불러오기 -->
+	<select id="getAllQnacate" resultType="com.portfolio.spring.dto.QnaCateDto">
+		SELECT * FROM QNA_CATE
+	</select>
+	
+	<!-- 카테고리 이름 얻어오기 -->
+	<select id="getQnaCate" resultType="com.portfolio.spring.dto.QnaCateDto">
+		SELECT QNAC_NAME FROM QNA_CATE WHERE QNAC_IDX = #{param1}
+	</select>
+	
+</mapper>
