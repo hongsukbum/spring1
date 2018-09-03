@@ -23,6 +23,11 @@ function pageMain(){
 }
 
 
+function pageBackProductList(){
+	location.href = "/product";
+}
+
+
 function pageModify(){
 	location.href = "userinfoPage";
 }

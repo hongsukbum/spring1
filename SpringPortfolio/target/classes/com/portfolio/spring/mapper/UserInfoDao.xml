@@ -45,8 +45,6 @@
 		UPDATE USERINFO SET UBAGID = #{param2} WHERE UIDX = #{param1} 
 	</update>
 	
-	
-	<!-- 석범추가 -->
 	<select id = "userlist"  resultType = "com.portfolio.spring.dto.UserInfoDto">
 		SELECT * FROM USERINFO
 	</select>

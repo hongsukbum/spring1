@@ -204,8 +204,9 @@ function admin_replyWriteConfirm(qna_idx){
 	//form을 지정된 경로로 전송
 	form.submit();
 }
+
 function reply_confirm(pd_idx){
-	
+		
 	var form = document.userReply;
 	
 	var url = "/userReply";

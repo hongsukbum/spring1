@@ -33,7 +33,6 @@
 		SELECT * FROM QNABOARD ORDER BY QNA_IDX DESC
 	</select>
 	
-	
 	<insert id="insertUserReply" parameterType="com.portfolio.spring.dto.QnaDto">
 		INSERT INTO QNABOARD(QNA_UNICK, QNA_QNAC_IDX, QNA_PD_IDX, QNA_CONTENT) VALUE(#{qna_unick},#{qna_qnac_idx},#{qna_pd_idx},#{qna_content})
 	</insert>

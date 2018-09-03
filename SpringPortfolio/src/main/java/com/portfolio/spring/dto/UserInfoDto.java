@@ -13,7 +13,7 @@ public class UserInfoDto{
 	private String ubirth;
 	private String ugender;
 	private Timestamp ujoinDate;
-	private int uenabled;
+	private int enabled;
 	private int uauthorityIdx;
 	private String ubagId;
 	
@@ -91,18 +91,26 @@ public class UserInfoDto{
 	public void setUjoinDate(Timestamp ujoinDate) {
 		this.ujoinDate = ujoinDate;
 	}
-	public int getUenabled() {
-		return uenabled;
+	
+
+		
+	public int getEnabled() {
+		return enabled;
 	}
-	public void setUenabled(int uenabled) {
-		this.uenabled = uenabled;
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
-	public int getUauthorityidx() {
+
+	public int getUauthorityIdx() {
 		return uauthorityIdx;
 	}
-	public void setUauthorityidx(int uauthorityIdx) {
+
+	public void setUauthorityIdx(int uauthorityIdx) {
 		this.uauthorityIdx = uauthorityIdx;
 	}
+
+
 	public String getUbagId() {
 		return ubagId;
 	}

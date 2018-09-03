@@ -25,8 +25,8 @@ public interface UserDao {
 	public void updateInputBag(int uidx, String pd_idx);
 	
 	//석범 추가
-		public ArrayList<UserInfoDto> userlist();
-		public UserInfoDto userDetail(int uidx);
-		public void userBan(int uidx);
+	public ArrayList<UserInfoDto> userlist();
+	public UserInfoDto userDetail(int uidx);
+	public void userBan(int uidx);
 	
 }

@@ -13,6 +13,7 @@
 <body>
 <script type = "text/javascript" charset = "UTF-8" src = "/resources/js/common.js"></script>
 <script type = "text/javascript" charset = "UTF-8" src = "/resources/js/product.js"></script>
+<script type = "text/javascript" charset = "UTF-8" src = "/resources/js/qnaCommon.js"></script>
 
 	<c:set var = "dto" value = "${productDetail}"/>
 	
@@ -65,13 +66,12 @@
 		<tr align = "center">
 			<td colspan = "2">
 				<input type = "button" value = "홈으로" onclick = "pageMain()">
-				<input type = "button" value = "뒤로가기" onclick = "pageBack()">
+				<input type = "button" value = "뒤로가기" onclick = "pageBackProductList()">
 			</td>
 		</tr>
 		
 	</table>
 	
-	<%-- 석범 추가 --%>
 	<%-- 석범 추가 --%>
 	<s:authorize ifAnyGranted="ROLE_USER">
 	<c:set value="${pd_reply_unick}" var="unick"></c:set>
@@ -115,6 +115,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-		
+	
+	
 </body>
 </html>

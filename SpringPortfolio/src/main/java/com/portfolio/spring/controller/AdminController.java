@@ -1,9 +1,6 @@
 package com.portfolio.spring.controller;
 
-import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +70,7 @@ public class AdminController {
 		
 		UserDao dao = sqlSession.getMapper(UserDao.class);
 		
-		userInfoDto.setUauthorityidx(0);
+		userInfoDto.setUauthorityIdx(0);
 		
 		dao.accountAdmin(userInfoDto);
 		

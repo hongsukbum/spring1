@@ -1,5 +1,6 @@
 package com.portfolio.spring.controller;
 
+import java.awt.SystemTray;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
@@ -32,6 +33,7 @@ import com.portfolio.spring.dao.UserDao;
 import com.portfolio.spring.dto.ProductDto;
 import com.portfolio.spring.dto.ProductPurchaseBagDto;
 import com.portfolio.spring.dto.PurchaseStatusDto;
+import com.portfolio.spring.dto.QnaDto;
 import com.portfolio.spring.util.Paging;
 
 @Controller
@@ -173,6 +175,7 @@ public class ProductController {
 	@RequestMapping("/productDetail")
 	public String productDetail(HttpServletRequest req, Model model){
 		
+		System.out.println("productDetail ###");
 		int pd_idx = Integer.parseInt(req.getParameter("pd_idx"));
 		
 		String isCheck = req.getParameter("isCheck");
@@ -186,13 +189,15 @@ public class ProductController {
 		model.addAttribute("index", index);
 
 		//------석범추가------------
+		
 		System.out.println("디테일");
 		
 		HttpSession session = req.getSession();
 		model.addAttribute("pd_reply_unick", (String)session.getAttribute("unick"));
 		
 		QnaDao q_dao = sqlSession.getMapper(QnaDao.class);
-		model.addAttribute("viewReplylist", q_dao.viewReply(4,pd_idx));	
+		model.addAttribute("viewReplylist", q_dao.viewReply(4,pd_idx));		
+		//------------------------
 		
 		return "product/productDetail";
 		
@@ -673,6 +678,4 @@ public class ProductController {
 		return "redirect:productPurchaseBag_Admin";
 		
 	}
-
-	
 }
